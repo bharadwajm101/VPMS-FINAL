@@ -1,0 +1,700 @@
+Post http://localhost:8081/api/user/register
+Body
+{
+  "name": "Vaishnavi",
+  "email": "vaishhuu123@gmail.com",
+  "password": "Vaishnavi@123"
+}
+Response 
+{
+  "message": "Registration successful",
+  "user": {
+    "id": 6,
+    "name": "Vaishnavi",
+    "email": "vaishhuu123@gmail.com",
+    "role": "CUSTOMER"
+  }
+}
+Post http://localhost:8081/api/user/login
+Body 
+{
+  "email": "vaishhuu123@gmail.com",
+  "password": "Vaishnavi@123"
+}
+Response
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2YWlzaGh1dTEyM0BnbWFpbC5jb20iLCJyb2xlIjoiQ1VTVE9NRVIiLCJpYXQiOjE3NTE2MTEyNzMsImV4cCI6MTc1MTY0NzI3M30.ddEES9k7kpCjyryPe2RPQd8vIm65Rn2F6VsRe7eshIs",
+  "role": "CUSTOMER",
+  "user": {
+    "id": 6,
+    "name": "Vaishnavi",
+    "email": "vaishhuu123@gmail.com",
+    "role": "CUSTOMER"
+  }
+}
+Post http://localhost:8081/api/user/login
+Body
+{
+  "email": "admin@vpm.com",
+  "password": "admin123"
+}
+Response
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkB2cG0uY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzUxNjExMjgwLCJleHAiOjE3NTE2NDcyODB9.okPG8Td0AK_hl61ucT0-7-im8xRoRvw7AztlRGZkXO8",
+  "role": "ADMIN",
+  "user": {
+    "id": 2,
+    "name": "Admin",
+    "email": "admin@vpm.com",
+    "role": "ADMIN"
+  }
+}
+Post http://localhost:8081/api/user/login
+Body 
+{
+  "email": "staff@vpm.com",
+  "password": "staff123"
+}
+Response
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdGFmZkB2cG0uY29tIiwicm9sZSI6IlNUQUZGIiwiaWF0IjoxNzUxNjExMjgzLCJleHAiOjE3NTE2NDcyODN9.zCS4Nzw8c_UB6CG11MXZaDcB8G9SzmaqXB3ycgq08Ec",
+  "role": "STAFF",
+  "user": {
+    "id": 3,
+    "name": "Staff",
+    "email": "staff@vpm.com",
+    "role": "STAFF"
+  }
+}
+Get http://localhost:8081/api/user/all
+Header 
+Authorization : Bearer <Admin token>
+Body 
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Bharadwajm",
+      "email": "Bharadwajm101@gmail.com",
+      "role": "CUSTOMER"
+    },
+    {
+      "id": 2,
+      "name": "Admin",
+      "email": "admin@vpm.com",
+      "role": "ADMIN"
+    },
+    {
+      "id": 3,
+      "name": "Staff",
+      "email": "staff@vpm.com",
+      "role": "STAFF"
+    },
+    {
+      "id": 5,
+      "name": "Bharadwajm2",
+      "email": "Bharadwajm1012@gmail.com",
+      "role": "STAFF"
+    },
+    {
+      "id": 6,
+      "name": "Vaishnavi",
+      "email": "vaishhuu123@gmail.com",
+      "role": "CUSTOMER"
+    }
+  ]
+}
+Get http://localhost:8081/api/user/profile
+Header 
+Authorization : Bearer <Admin token, Staff token, User token>
+Response{
+  "id": 6,
+  "name": "Vaishnavi",
+  "email": "vaishhuu123@gmail.com",
+  "role": "CUSTOMER"
+}
+Put http://localhost:8081/api/user/5
+Header 
+Authorization : Bearer <Admin token>
+Body
+{
+    "id": 5,
+    "name": "Bharadwajm2",
+    "email": "Bharadwajm1012@gmail.com",
+    "role": "STAFF"
+}
+Response
+{
+  "user": {
+    "id": 5,
+    "name": "Bharadwajm2",
+    "email": "Bharadwajm1012@gmail.com",
+    "role": "STAFF"
+  },
+  "message": "User updated"
+}
+Get http://localhost:8081/api/user/5
+Header 
+Authorization : Bearer <Admin token, Staff token, User token>
+Response
+{
+  "user": {
+    "id": 5,
+    "name": "Bharadwajm2",
+    "email": "Bharadwajm1012@gmail.com",
+    "role": "STAFF"
+  }
+}
+Delete http://localhost:8081/api/user/4
+Header 
+Authorization : Bearer <Admin token>
+Response
+{
+  "message": "User deleted successfully"
+}
+Post http://localhost:8082/api/slots
+Header 
+Authorization : Bearer <Admin token>
+Body
+{
+  "location": "B11",
+  "type": "4W"
+}
+Response
+{
+  "slot": {
+    "slotId": 9,
+    "location": "B11",
+    "type": "4W",
+    "occupied": false
+  },
+  "message": "Slot added successfully"
+}
+DELETE http://localhost:8082/api/slots/9
+Header 
+Authorization : Bearer <Admin token>
+Response
+{
+  "message": "Slot deleted successfully"
+}
+Get http://localhost:8082/api/slots
+Header 
+Authorization : Bearer <Admin token>
+{
+  "message": "All slots retrieved successfully",
+  "slots": [
+    {
+      "slotId": 1,
+      "location": "A1",
+      "type": "2W",
+      "occupied": false
+    },
+    {
+      "slotId": 2,
+      "location": "A2",
+      "type": "2W",
+      "occupied": false
+    },
+    {
+      "slotId": 3,
+      "location": "A3",
+      "type": "2W",
+      "occupied": false
+    },
+    {
+      "slotId": 4,
+      "location": "B1",
+      "type": "4W",
+      "occupied": false
+    },
+  ]
+}
+Put http://localhost:8082/api/slots/6
+Header 
+Authorization : Bearer <staff token>
+Body
+{
+      "location": "B3",
+      "type": "4W",
+      "isOccupied": true
+}
+Response
+{
+  "slot": {
+    "slotId": 6,
+    "location": "B3",
+    "type": "4W",
+    "occupied": true
+  },
+  "message": "Slot status updated"
+}
+Get http://localhost:8082/api/slots/available
+Header 
+Authorization : Bearer <customer token>
+Response
+{
+  "message": "Available slots fetched",
+  "slots": [
+    {
+      "slotId": 1,
+      "location": "A1",
+      "type": "2W",
+      "occupied": false
+    },
+    {
+      "slotId": 2,
+      "location": "A2",
+      "type": "2W",
+      "occupied": false
+    },
+    {
+      "slotId": 3,
+      "location": "A3",
+      "type": "2W",
+      "occupied": false
+    },
+  ]
+}
+Get http://localhost:8082/api/slots/available/type/4w
+Header 
+Authorization : Bearer <Admin token, Staff token, User token>
+Response 
+{
+  "message": "Available slots of type 4w fetched",
+  "slots": [
+    {
+      "slotId": 4,
+      "location": "B1",
+      "type": "4W",
+      "occupied": false
+    },
+    {
+      "slotId": 5,
+      "location": "B2",
+      "type": "4W",
+      "occupied": false
+    },
+    {
+      "slotId": 8,
+      "location": "B3",
+      "type": "4W",
+      "occupied": false
+    }
+  ]
+}
+Put http://localhost:8082/api/slots/slot/8
+Header 
+Authorization : Bearer <Admin token, Staff token>
+Body 
+    {
+      "occupied": false
+    }
+Response
+{
+  "slot": {
+    "slotId": 8,
+    "location": "B3",
+    "type": "4W",
+    "occupied": false
+  }
+}
+Post http://localhost:8083/api/vehicle-log/entry
+Header 
+Authorization : Bearer <Admin token, Staff token>
+body 
+{
+  "vehicleNumber": "ka20es1518",
+  "userId": 6,
+  "slotId": 1
+}
+response
+{
+  "log": {
+    "logId": 3,
+    "vehicleNumber": "ka20es1518",
+    "entryTime": "2025-07-04T13:04:46.5158662",
+    "exitTime": null,
+    "duration": null,
+    "userId": 6,
+    "slotId": 1,
+    "slotType": "2W"
+  },
+  "message": "Vehicle entry recorded"
+}
+post http://localhost:8083/api/vehicle-log/exit
+Header 
+Authorization : Bearer <Admin token, Staff token>
+Body
+{
+  "logId":3
+}
+Response
+{
+  "log": {
+    "logId": 3,
+    "vehicleNumber": "ka20es1518",
+    "entryTime": "2025-07-04T13:04:46.515866",
+    "exitTime": "2025-07-04T13:08:21.9541849",
+    "duration": "00:03:35",
+    "userId": 6,
+    "slotId": 1,
+    "slotType": "2W"
+  },
+  "message": "Vehicle exit recorded"
+}
+Get http://localhost:8083/api/vehicle-log
+Header 
+Authorization : Bearer <Admin token>
+Response{
+  "count": 3,
+  "logs": [
+    {
+      "logId": 1,
+      "vehicleNumber": "ka20es1518",
+      "entryTime": "2025-07-03T10:57:02.128646",
+      "exitTime": "2025-07-03T11:07:49.321038",
+      "duration": "00:10:47",
+      "userId": 5,
+      "slotId": 5,
+      "slotType": "4W"
+    },
+    {
+      "logId": 2,
+      "vehicleNumber": "ka20es1518",
+      "entryTime": "2025-07-03T10:58:18.150808",
+      "exitTime": null,
+      "duration": null,
+      "userId": 5,
+      "slotId": 4,
+      "slotType": "4W"
+    }
+  ]
+}
+
+Get http://localhost:8083/api/vehicle-log/1
+Header 
+Authorization : Bearer <Admin token>
+Response
+{
+  "logId": 1,
+  "vehicleNumber": "ka20es1518",
+  "entryTime": "2025-07-03T10:57:02.128646",
+  "exitTime": "2025-07-03T11:07:49.321038",
+  "duration": "00:10:47",
+  "userId": 5,
+  "slotId": 5,
+  "slotType": "4W"
+}
+Put http://localhost:8083/api/vehicle-log/1
+Header 
+Authorization : Bearer <Admin token, staff token>
+Body 
+    {
+      "logId": 1,
+      "vehicleNumber": "ka20es1519",
+      "entryTime": "2025-07-03T10:57:02.128646",
+      "exitTime": "2025-07-03T11:07:49.321038",
+      "duration": "00:10:47",
+      "userId": 5,
+      "slotId": 5,
+      "slotType": "4W"
+    }
+Response
+{
+  "log": {
+    "logId": 1,
+    "vehicleNumber": "ka20es1519",
+    "entryTime": "2025-07-03T10:57:02.128646",
+    "exitTime": "2025-07-03T11:07:49.321038",
+    "duration": "00:10:47",
+    "userId": 5,
+    "slotId": 5,
+    "slotType": "4W"
+  },
+  "message": "Vehicle log updated"
+}
+Get http://localhost:8083/api/vehicle-log/user/5
+Header 
+Authorization : Bearer <Admin token, staff token,customer token>
+Response
+[
+  {
+    "logId": 1,
+    "vehicleNumber": "ka20es15819",
+    "entryTime": "2025-07-03T10:57:02.128646",
+    "exitTime": "2025-07-03T11:07:49.321038",
+    "duration": "00:10:47",
+    "userId": 5,
+    "slotId": 5,
+    "slotType": "4W"
+  },
+  {
+    "logId": 2,
+    "vehicleNumber": "ka20es1518",
+    "entryTime": "2025-07-03T10:58:18.150808",
+    "exitTime": null,
+    "duration": null,
+    "userId": 5,
+    "slotId": 4,
+    "slotType": "4W"
+  }
+]
+Post http://localhost:8084/api/reservations
+Header 
+Authorization : Bearer <customer token>
+Body 
+{
+  "userId": 1,
+  "slotId": 5,
+  "vehicleNumber": "KA40ES1890",
+  "startTime": "2025-07-04T08:49:05",
+  "endTime": "2025-07-04T08:50:05",
+  "type": "4W"
+}
+Response
+{
+  "message": "Reservation created successfully",
+  "reservation": {
+    "reservationId": 1,
+    "userId": 1,
+    "slotId": 5,
+    "vehicleNumber": "KA40ES1890",
+    "startTime": "2025-07-04T08:49:05",
+    "endTime": "2025-07-04T08:50:05",
+    "status": "ACTIVE",
+    "type": "4W",
+    "durationMinutes": 1
+  }
+}
+Get http://localhost:8084/api/reservations/1
+Header 
+Authorization : Bearer <customer token, admin token>
+Response{
+  "reservationId": 1,
+  "userId": 1,
+  "slotId": 5,
+  "vehicleNumber": "KA40ES1890",
+  "startTime": "2025-07-04T08:49:05",
+  "endTime": "2025-07-04T08:50:05",
+  "status": "ACTIVE",
+  "type": "4W",
+  "durationMinutes": 1
+}
+Put http://localhost:8084/api/reservations/1
+Header 
+Authorization : Bearer <customer token, admin token>
+body 
+{
+  "userId": 6,
+  "slotId": 5,
+  "vehicleNumber": "hjgsd53",
+  "startTime": "2025-07-04T09:20:33.962Z",
+  "endTime": "2025-07-04T09:20:33.962Z",
+  "type": "4w"
+}
+Response{
+  "message": "Reservation updated successfully",
+  "reservation": {
+    "reservationId": 1,
+    "userId": 1,
+    "slotId": 5,
+    "vehicleNumber": "hjgsd53",
+    "startTime": "2025-07-04T09:20:33.962",
+    "endTime": "2025-07-04T09:20:33.962",
+    "status": "ACTIVE",
+    "type": "4w",
+    "durationMinutes": 0
+  }
+}
+GEt http://localhost:8084/api/reservations/user/1
+Header 
+Authorization : Bearer <customer token, admin token>
+Body 
+{
+  "userId": 6,
+  "slotId": 5,
+  "vehicleNumber": "hjgsd53",
+  "startTime": "2025-07-04T09:20:33.962Z",
+  "endTime": "2025-07-04T09:20:33.962Z",
+  "type": "4w"
+}
+response{
+  "userId": 6,
+  "slotId": 5,
+  "vehicleNumber": "hjgsd53",
+  "startTime": "2025-07-04T09:20:33.962Z",
+  "endTime": "2025-07-04T09:20:33.962Z",
+  "type": "4w"
+}
+delete http://localhost:8084/api/reservations/1
+Header 
+Authorization : Bearer <customer token, admin token>
+response
+{
+  "message": "Reservation cancelled successfully"
+}
+Get http://localhost:8084/api/reservations
+Header 
+Authorization : Bearer <customer token, admin token>
+[
+  {
+    "reservationId": 1,
+    "userId": 1,
+    "slotId": 5,
+    "vehicleNumber": "hjgsd53",
+    "startTime": "2025-07-04T09:20:33.962",
+    "endTime": "2025-07-04T09:20:33.962",
+    "status": "CANCELLED",
+    "type": "4w",
+    "durationMinutes": 0
+  }
+]
+post http://localhost:8085/api/billing
+Header 
+Authorization : Bearer <customer token, admin token,customer token >
+body 
+{
+  "userId": 1,
+  "reservationId": 1,
+  "logId": null,
+  "timestamp": "2025-07-04T09:28:28.519Z",
+  "paymentMethod": "UPI"
+}
+response 
+{
+  "success": true,
+  "message": "Invoice created successfully",
+  "data": {
+    "invoiceId": 6,
+    "userId": 1,
+    "reservationId": 1,
+    "logId": null,
+    "type": "4w",
+    "amount": 0.0,
+    "paymentMethod": "UPI",
+    "status": "UNPAID",
+    "timestamp": "2025-07-04T09:28:28.519"
+  }
+}
+get http://localhost:8085/api/billing/1
+Header 
+Authorization : Bearer <customer token, admin token,customer token >
+response
+{
+  "success": true,
+  "message": "Invoice fetched successfully",
+  "data": {
+    "invoiceId": 1,
+    "userId": 1,
+    "reservationId": 1,
+    "logId": null,
+    "type": "4w",
+    "amount": 0.0,
+    "paymentMethod": "UPI",
+    "status": "UNPAID",
+    "timestamp": "2025-07-04T09:28:28.519"
+  }
+}
+post http://localhost:8085/api/billing/2/pay
+header 
+Authorization : Bearer <customer token, admin token,customer token >
+body
+{
+  "paymentMethod": "CASH"
+}
+response{
+  "success": true,
+  "message": "Invoice paid successfully",
+  "data": {
+    "invoiceId": 2,
+    "userId": 1,
+    "reservationId": 1,
+    "logId": null,
+    "type": "4w",
+    "amount": 0.0,
+    "paymentMethod": "CASH",
+    "status": "PAID",
+    "timestamp": "2025-07-04T09:28:28.519"
+  }
+}
+post http://localhost:8085/api/billing/3/cancel
+header 
+Authorization : Bearer <customer token, admin token,customer token >
+response 
+{
+  "success": true,
+  "message": "Invoice cancelled successfully",
+  "data": {
+    "invoiceId": 3,
+    "userId": 1,
+    "reservationId": 1,
+    "logId": null,
+    "type": "4w",
+    "amount": 0.0,
+    "paymentMethod": "UPI",
+    "status": "CANCELLED",
+    "timestamp": "2025-07-04T09:28:28.519"
+  }
+}
+get http://localhost:8085/api/billing
+header 
+Authorization : Bearer <customer token, admin token,customer token >
+response{
+  "success": true,
+  "message": "All invoices retrieved",
+  "data": [
+    {
+      "invoiceId": 1,
+      "userId": 1,
+      "reservationId": 1,
+      "logId": null,
+      "type": "4w",
+      "amount": 0.0,
+      "paymentMethod": "CASH",
+      "status": "PAID",
+      "timestamp": "2025-07-04T09:28:28.519"
+    },
+    {
+      "invoiceId": 2,
+      "userId": 1,
+      "reservationId": 1,
+      "logId": null,
+      "type": "4w",
+      "amount": 0.0,
+      "paymentMethod": "CASH",
+      "status": "PAID",
+      "timestamp": "2025-07-04T09:28:28.519"
+    }
+  ]
+}
+get http://localhost:8085/api/billing/user/1
+header 
+Authorization : Bearer <customer token>
+response{
+  "success": true,
+  "message": "User invoices retrieved",
+  "data": [
+    {
+      "invoiceId": 1,
+      "userId": 1,
+      "reservationId": 1,
+      "logId": null,
+      "type": "4w",
+      "amount": 0.0,
+      "paymentMethod": "CASH",
+      "status": "PAID",
+      "timestamp": "2025-07-04T09:28:28.519"
+    },
+    {
+      "invoiceId": 2,
+      "userId": 1,
+      "reservationId": 1,
+      "logId": null,
+      "type": "4w",
+      "amount": 0.0,
+      "paymentMethod": "CASH",
+      "status": "PAID",
+      "timestamp": "2025-07-04T09:28:28.519"
+    }
+  ]
+}
