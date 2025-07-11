@@ -193,8 +193,8 @@ const VehicleEntry = () => {
         userId: exitLog.userId,
         logId: exitLog.logId,
         Type: exitLog.slotType, // Note: DTO field is "Type" with capital T
-        paymentMethod: paymentMethod,
-        timestamp: new Date().toISOString()
+        paymentMethod: paymentMethod
+        // timestamp will be set by backend to current time
       };
       
       console.log('Billing data being sent:', billingData);

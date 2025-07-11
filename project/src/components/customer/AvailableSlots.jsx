@@ -22,10 +22,28 @@ const AvailableSlots = () => {
   useEffect(() => {
     fetchSlots();
     
-    // Auto-refresh every 30 seconds to show real-time availability
-    const interval = setInterval(fetchSlots, 30000);
+    // Auto-refresh every 15 seconds to show real-time availability (reduced from 30s)
+    const interval = setInterval(fetchSlots, 15000);
     
-    return () => clearInterval(interval);
+    // Listen for reservation events to trigger immediate refresh
+    const handleReservationUpdate = () => {
+      console.log('AvailableSlots - Reservation update detected, refreshing slots...');
+      fetchSlots();
+    };
+    
+    const handlePaymentSuccess = () => {
+      console.log('AvailableSlots - Payment success detected, refreshing slots...');
+      fetchSlots();
+    };
+    
+    window.addEventListener('reservationUpdate', handleReservationUpdate);
+    window.addEventListener('paymentSuccess', handlePaymentSuccess);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('reservationUpdate', handleReservationUpdate);
+      window.removeEventListener('paymentSuccess', handlePaymentSuccess);
+    };
   }, [token, filterType]);
 
   const fetchSlots = async () => {
@@ -121,8 +139,8 @@ const AvailableSlots = () => {
       const billingData = {
         userId: user.id,
         reservationId: reservation.reservationId,
-        paymentMethod: paymentMethod,
-        timestamp: new Date().toISOString()
+        paymentMethod: paymentMethod
+        // timestamp will be set by backend to current time
       };
       console.log('Creating invoice with data:', billingData);
       
@@ -143,6 +161,18 @@ const AvailableSlots = () => {
         setShowBillingModal(false);
         setReservationData(null);
         setBillingAmount(0);
+        
+        // Trigger immediate refresh and notify other components
+        console.log('AvailableSlots - Dispatching reservationUpdate event');
+        window.dispatchEvent(new CustomEvent('reservationUpdate', {
+          detail: { reservationId: reservation.reservationId, slotId: reservationData.slotId }
+        }));
+        
+        // Also trigger payment success event for other components
+        window.dispatchEvent(new CustomEvent('paymentSuccess', {
+          detail: { invoiceId: invoice.invoiceId, amount: billingAmount }
+        }));
+        
         fetchSlots();
       }, 3000);
       
@@ -171,8 +201,8 @@ const AvailableSlots = () => {
       const billingData = {
         userId: user.id,
         reservationId: reservation.reservationId,
-        paymentMethod: 'UPI',
-        timestamp: new Date().toISOString()
+        paymentMethod: 'UPI'
+        // timestamp will be set by backend to current time
       };
       
       // Create and pay the invoice immediately

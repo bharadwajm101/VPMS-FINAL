@@ -68,10 +68,10 @@ public class ReservationServiceImpl implements ReservationService {
                 throw new RuntimeException("Slot already reserved for the selected time.");
             }
         }
- 
-        // Call slot-service to mark it as occupied
-        slotClient.markSlotOccupied(dto.getSlotId());
- 
+
+        // Do NOT mark slot as occupied here. Only reservation is created.
+        // slotClient.markSlotOccupied(dto.getSlotId()); // <-- REMOVE THIS LINE
+
         Reservation reservation = Reservation.builder()
                 .userId(dto.getUserId())
                 .slotId(dto.getSlotId())
@@ -81,9 +81,9 @@ public class ReservationServiceImpl implements ReservationService {
                 .status(ReservationStatus.ACTIVE)
                 .type(dto.getType())
                 .build();
- 
+
         reservationRepo.save(reservation);
- 
+
         return mapToDTO(reservation);
     }
     @Override
