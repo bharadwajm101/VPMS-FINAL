@@ -133,4 +133,4 @@ The module is implemented using a multi-layered architecture to ensure separatio
 ## API Documentation
 For detailed documentation on the API endpoints, please refer to the dedicated API documentation guide 
 
-[Slot API Documentation](/slot-service/Slot%20Endpoints.md)
+[Slot API Documentation](https://github.com/Bharadwajm-06/VPMS-FINAL/blob/main/VPMS/slot-service/Slot%20Endpoints.md)
