@@ -8,6 +8,7 @@ class SlotServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// This test verifies that the Spring application context loads successfully
+		// If there are any configuration issues, this test will fail
 	}
-
 }
