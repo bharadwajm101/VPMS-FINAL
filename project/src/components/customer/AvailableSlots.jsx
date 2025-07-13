@@ -2,12 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Car, MapPin, Clock, Calendar, Filter } from 'lucide-react';
 import { slotService, reservationService, billingService } from '../../services/api';
-import eventManager from '../../services/eventManager';
-import { useApiCall } from '../../hooks/useApiCall';
 
 const AvailableSlots = () => {
   const { token, user } = useAuth();
-  const { makeApiCall } = useApiCall(500); // 500ms debounce
   const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterType, setFilterType] = useState('ALL');
