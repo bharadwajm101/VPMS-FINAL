@@ -59,30 +59,6 @@ void addSlot_validDetails_slotAdded() {
         assertThrows(RuntimeException.class, () -> slotService.addSlot(req));
     }
 
-    // SM_003: Update slot details
-    // @Test
-    // void updateSlot_validDetails_slotUpdated() {
-    //     SlotRequestDTO req = new SlotRequestDTO();
-    //     req.setLocation("B2");
-    //     req.setType("4W");
-    //     req.setIsOccupied(true);
-    
-    //     Slot slot = new Slot();
-    //     slot.setSlotId(2L);
-    //     slot.setLocation("A1");
-    //     slot.setType("2W");
-    //     slot.setOccupied(false);
-    
-    //     when(slotRepository.findById(2L)).thenReturn(Optional.of(slot));
-    //     when(slotRepository.save(any(Slot.class))).thenReturn(slot);
-    
-    //     SlotResponseDTO res = slotService.updateSlot(2L, req);
-    
-    //     assertEquals("B2", res.getLocation());
-    //     assertEquals("4W", res.getType());
-    //     assertTrue(res.isOccupied());
-    // }
-
     // SM_004: Delete a parking slot
     @Test
     void deleteSlot_validId_slotDeleted() {

@@ -27,28 +27,30 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    fetchProfile();
+    const loadProfile = async () => {
+      try {
+        setLoading(true);
+        const data = await userService.getProfile();
+        setProfile(data);
+        setFormData({
+          name: data.name || '',
+          email: data.email || '',
+          currentPassword: '',
+          newPassword: '',
+          confirmPassword: ''
+        });
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+        setError('Failed to load profile. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    loadProfile();
   }, []);
 
-  const fetchProfile = async () => {
-    try {
-      setLoading(true);
-      const data = await userService.getProfile();
-      setProfile(data);
-      setFormData({
-        name: data.name || '',
-        email: data.email || '',
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: ''
-      });
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-      setError('Failed to load profile. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -126,8 +128,8 @@ const Profile = () => {
       setProfile(updatedUser);
       setIsEditing(false);
       setSuccess('Profile updated successfully!');
-      // Refresh user data in context
-      await refreshUser();
+      // Update user data in context directly (no additional API call)
+      // The updatedUser data is already available from the updateUser API call
       // Clear password fields
       setFormData(prev => ({
         ...prev,
