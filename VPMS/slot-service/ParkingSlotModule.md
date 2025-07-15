@@ -35,7 +35,7 @@ The **Parking Slot Module** is responsible for managing parking slot-related ope
 | **isOccupied** | BOOLEAN    | Not Null, Default false        | Indicates whether the slot is currently occupied |
 
 ## Component Diagram
-![Component Diagram](VPMS/assets/images/Slot_component.png)
+![Component Diagram](../VPMS/assets/images/Slot_component.png)
 
 ## Layered Architecture of Parking Slot Management Module 
 
