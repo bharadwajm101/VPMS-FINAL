@@ -74,7 +74,7 @@
 
 Manages user registration, login, and role-based access control for admins, staff, and customers. Ensures secure authentication and authorization processes.
 
-[Parking Slot Management Module]([slot-service/ParkingSlotModule.md](https://github.com/bharadwajm101/VPMS-FINAL/blob/main/VPMS/slot-service/ParkingSlotModule.md))
+[Parking Slot Management Module](VPMS/slot-service/ParkingSlotModule.md)
 
 Handles parking slot operations such as adding, updating, and checking availability. Maintains real-time status of parking slots.
 
