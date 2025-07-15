@@ -35,48 +35,7 @@ The **Parking Slot Module** is responsible for managing parking slot-related ope
 | **isOccupied** | BOOLEAN    | Not Null, Default false        | Indicates whether the slot is currently occupied |
 
 ## Component Diagram
-```mermaid
-flowchart LR
-
-  subgraph Frontend [React Frontend]
-    direction TB
-    A1[Slot Management UI]
-    A2[ParkingSlot API Client]
-  end
-
-  subgraph Backend [Spring Boot Backend]
-    direction TB
-    B1[ParkingSlotController]
-    B2[ParkingSlotService]
-    B3[ParkingSlotRepository]
-  end
-
-  subgraph Database [MySQL Database]
-    direction TB
-    C1[(ParkingSlot Table)]
-  end
-
-  D1[ParkingSlotDTO]
-  D2[ParkingSlot Entity]
-
-  A2 -->|HTTP/REST| B1
-  B1 -->|Calls| B2
-  B2 -->|Calls| B3
-  B3 -->|ORM/JPA| C1
-
-  B1 ---|uses| D1
-  B3 ---|maps to| D2
-
-  classDef frontend fill:#dae8fc,stroke:#6c8ebf,color:#1a237e
-  classDef backend fill:#d5e8d4,stroke:#82b366,color:#1b4332
-  classDef storage fill:#e8def8,stroke:#8e44ad,color:#4a148c
-  classDef model fill:#fff2cc,stroke:#d6b656,color:#7f4f24
-
-  class A1,A2 frontend
-  class B1,B2,B3 backend
-  class C1 storage
-  class D1,D2 model
-```
+![Component Diagram](assets/images/Architecture_diagram.png)
 
 ## Layered Architecture of Parking Slot Management Module 
 
