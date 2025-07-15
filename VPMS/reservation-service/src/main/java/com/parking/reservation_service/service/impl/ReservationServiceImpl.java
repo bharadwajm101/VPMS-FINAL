@@ -20,7 +20,7 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository reservationRepo;
     private final SlotClient slotClient;
 
-    @Scheduled(fixedRate = 10000) // runs every 10 seconds
+    @Scheduled(fixedRate = 1000000) // runs every 1000 seconds
     public void completeExpiredReservations() {
         try {
             List<Reservation> expired = reservationRepo.findByStatusAndEndTimeBefore(ReservationStatus.ACTIVE, LocalDateTime.now());

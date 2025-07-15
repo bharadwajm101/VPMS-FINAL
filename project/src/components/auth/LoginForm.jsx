@@ -36,7 +36,7 @@ const LoginForm = ({ onToggleForm }) => {
     const demoAccounts = {
       admin: { email: 'admin@vpm.com', password: 'admin123' },
       staff: { email: 'staff@vpm.com', password: 'staff123' },
-      customer: { email: 'Bharadwaj@parking.com', password: 'bharadwaj123' },
+      customer: { email: 'bharadwaj@parking.com', password: 'bharadwaj123' },
     };
 
     const account = demoAccounts[role];

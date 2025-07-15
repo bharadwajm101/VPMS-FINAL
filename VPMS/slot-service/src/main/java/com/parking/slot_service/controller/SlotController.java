@@ -29,7 +29,7 @@ public class SlotController {
  
     private final SlotService slotService;
  
-    // ✅ 1. Add a new parking slot [ADMIN only]
+    //  1. Add a new parking slot [ADMIN only]
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Map<String, Object>> addSlot(@RequestBody SlotRequestDTO requestDTO) {
@@ -41,7 +41,7 @@ public class SlotController {
         return ResponseEntity.ok(response);
     }
  
-    // ✅ 2. Delete a parking slot [ADMIN only]
+    //  2. Delete a parking slot [ADMIN only]
     @DeleteMapping("/{slotId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Map<String, String>> deleteSlot(@PathVariable Long slotId) {
@@ -52,7 +52,7 @@ public class SlotController {
         ));
     }
  
-    // ✅ 3. Update slot availability [STAFF only]
+    //  3. Update slot availability [STAFF only]
     @PutMapping("{slotId}")
     @PreAuthorize("hasAuthority('STAFF')")
     public ResponseEntity<Map<String, Object>> updateSlot(@PathVariable Long slotId,
@@ -77,7 +77,7 @@ public class SlotController {
         ));
     }
  
-    // ✅ 5. Get all slots (both occupied and unoccupied) [ADMIN only]
+    //  5. Get all slots (both occupied and unoccupied) [ADMIN only]
     @GetMapping
     @PreAuthorize("hasAnyAuthority('ADMIN','STAFF','CUSTOMER')")
     public ResponseEntity<Map<String, Object>> getAllSlots() {
@@ -90,7 +90,7 @@ public class SlotController {
     }
 
 
-// ✅ 6. Get available slots by type (open to all)
+//  6. Get available slots by type (open to all)
 @GetMapping("/available/type/{type}")
 public ResponseEntity<Map<String, Object>> getAvailableSlotsByType(@PathVariable String type) {
     List<SlotResponseDTO> slots = slotService.getAvailableSlotsByType(type);
@@ -110,7 +110,7 @@ public ResponseEntity<Map<String, Object>> updateSlotOccupancy(
     res.put("slot", updatedSlot);
     return ResponseEntity.ok(res);
 }
-    // ✅ Feign-accessible endpoint to update slot occupancy status
+    //  Feign-accessible endpoint to update slot occupancy status
     @PutMapping("/mark-occupied/{slotId}")
     public ResponseEntity<Void> markSlotOccupied(@PathVariable Long slotId) {
         System.out.println("Marking slot " + slotId + " as OCCUPIED");

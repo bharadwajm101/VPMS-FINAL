@@ -26,7 +26,7 @@ class SlotServiceImplTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    // SM_001: Add new parking slot
+    // 1: Add new parking slot
 @Test
 void addSlot_validDetails_slotAdded() {
     SlotRequestDTO req = new SlotRequestDTO();
@@ -47,7 +47,7 @@ void addSlot_validDetails_slotAdded() {
     assertFalse(res.isOccupied());
 }
 
-    // SM_002: Add slot with duplicate ID
+    // 2: Add slot with duplicate ID
     @Test
     void addSlot_duplicateId_throwsException() {
         SlotRequestDTO req = new SlotRequestDTO();
@@ -59,14 +59,14 @@ void addSlot_validDetails_slotAdded() {
         assertThrows(RuntimeException.class, () -> slotService.addSlot(req));
     }
 
-    // SM_004: Delete a parking slot
+    // 4: Delete a parking slot
     @Test
     void deleteSlot_validId_slotDeleted() {
         doNothing().when(slotRepository).deleteById(1L);
         assertDoesNotThrow(() -> slotService.deleteSlot(1L));
     }
 
-    // SM_005: View real-time availability
+    // 5: View real-time availability
     @Test
     void getAvailableSlots_returnsAvailableSlots() {
         Slot slot = new Slot();
@@ -82,7 +82,7 @@ void addSlot_validDetails_slotAdded() {
         assertFalse(slots.get(0).isOccupied());
     }
 
-    // SM_006: Occupy a slot
+    // 6: Occupy a slot
     @Test
     void updateSlotOccupancy_occupySlot_statusChanged() {
         Slot slot = new Slot();
@@ -96,7 +96,7 @@ void addSlot_validDetails_slotAdded() {
         assertTrue(res.isOccupied());
     }
 
-    // SM_007: Free a slot
+    // 7: Free a slot
     @Test
     void updateSlotOccupancy_freeSlot_statusChanged() {
         Slot slot = new Slot();
@@ -110,7 +110,7 @@ void addSlot_validDetails_slotAdded() {
         assertFalse(res.isOccupied());
     }
 
-    // SM_008: Add slot with invalid type
+    // 8: Add slot with invalid type
     @Test
     void addSlot_invalidType_throwsException() {
         SlotRequestDTO req = new SlotRequestDTO();
